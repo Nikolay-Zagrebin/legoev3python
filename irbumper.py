@@ -13,27 +13,27 @@ ir = InfraredSensor()
 
 tank = MoveTank(OUTPUT_B, OUTPUT_D)
 
-current_speed = 100
+current_speed = -100
 
 def go_forward():
-	tank.on(-SpeedPercent(current_speed), -SpeedPercent(current_speed))
+	tank.on(current_speed, current_speed)
 
 def back_up():
-	tank.on_for_seconds(-SpeedPercent(50), -SpeedPercent(50), 2)
+	tank.on_for_seconds(100, 100, 2)
 
 def rotate_left():
-	tank.on_for_rotations(SpeedPercent(50), -SpeedPercent(50), 0.5)
+	tank.on_for_rotations(70, -70, 0.5)
 
 def rotate_right():
-	tank.on_for_rotations(-SpeedPercent(50), SpeedPercent(50), 0.5)
+	tank.on_for_rotations(-70, 70, 0.5)
 
 
 
 while True:
 	if ir.proximity < 90:
-		current_speed = max(30, ir.proximity)
+		current_speed = min(-30, -1 * ir.proximity)
 	else:
-		current_speed = 100
+		current_speed = -100
 
 	if middle.is_pressed:
 		back_up()
