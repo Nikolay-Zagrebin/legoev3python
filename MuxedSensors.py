@@ -8,6 +8,31 @@ import time
 from ev3dev2.button import ButtonBase
 from ev3dev2.sensor import Sensor
 from ev3dev2.port import LegoPort
+from ev3dev2.sensor.lego import InfraredSensor, ColorSensor
+
+class ColorSensorMuxed(ColorSensor):
+	"""
+	infrared sensor behind a sensor mux
+	"""
+
+    def __init__(self, address=None, name_pattern=SYSTEM_DEVICE_NAME_CONVENTION, name_exact=False, **kwargs):
+		port = LegoPort(address = address)
+		port.mode = 'uart'
+		port.set_device = 'lego-ev3-color'
+        super(ColorSensor, self).__init__(address, name_pattern, name_exact, driver_name='lego-ev3-color', **kwargs)
+
+
+class InfraredSensorMuxed(InfraredSensor):
+	"""
+	infrared sensor behind a sensor mux
+	"""
+
+    def __init__(self, address=None, name_pattern=SYSTEM_DEVICE_NAME_CONVENTION, name_exact=False, **kwargs):
+		port = LegoPort(address = address)
+		port.mode = 'uart'
+		port.set_device = 'lego-ev3-ir'
+        super(InfraredSensor, self).__init__(address, name_pattern, name_exact, driver_name='lego-ev3-ir', **kwargs)
+
 
 class TouchMuxed(Sensor):
     """

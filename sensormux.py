@@ -2,7 +2,7 @@
 from ev3dev2.port import LegoPort
 from ev3dev2.led import Leds
 from ev3dev2.sensor import Sensor
-from TouchMuxed import TouchMuxed
+from MuxedSensors import TouchMuxed
 
 """
 Example of using the TouchMuxed class
